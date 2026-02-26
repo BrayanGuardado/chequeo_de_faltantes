@@ -1,7 +1,7 @@
 import type { Category } from "../../../types/categories";
 
 const CategoryCard = ({ category }: { category: Category }) => {
-  const { id, name } = category;
+  const { name } = category;
 
   const handleDelete = () => {}; //Pendiente
 
