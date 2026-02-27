@@ -10,6 +10,7 @@ type AppContextType = {
   destinationPhone: string;
 
   saveDestinationPhone: (phone: string) => void;
+  updateDestinationPhone: (newPhone: string) => void;
 };
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
@@ -28,8 +29,14 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
     setDestinationPhone(phone);
   }
 
+  function updateDestinationPhone(newPhone: string) {
+    setDestinationPhone(newPhone);
+  }
+
   return (
-    <AppContext.Provider value={{ destinationPhone, saveDestinationPhone }}>
+    <AppContext.Provider
+      value={{ destinationPhone, saveDestinationPhone, updateDestinationPhone }}
+    >
       {children}
     </AppContext.Provider>
   );
