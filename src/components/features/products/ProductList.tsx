@@ -1,5 +1,6 @@
 import { useCategory } from "../../../context/CategoryContext";
 import { useProduct } from "../../../context/ProductContext";
+import ProductCard from "./ProductCard";
 
 const ProductList = () => {
   const {
@@ -7,7 +8,6 @@ const ProductList = () => {
     resetSelectedValues,
     getProductsFormCategoryId,
     isSomeProductSelected,
-    checkProduct,
     checkAllProductsFromCategory,
   } = useProduct();
 
@@ -52,14 +52,7 @@ const ProductList = () => {
                       key={p.id}
                       className="flex justify-between items-center px-3 py-2 rounded-lg hover:bg-gray-50"
                     >
-                      <span>{p.name}</span>
-
-                      <input
-                        type="checkbox"
-                        checked={p.isSelected}
-                        onChange={(e) => checkProduct(p.id, e.target.checked)}
-                        className="accent-amber-500"
-                      />
+                      <ProductCard product={p} />
                     </div>
                   ))}
                 </div>

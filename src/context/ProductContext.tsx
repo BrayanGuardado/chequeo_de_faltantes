@@ -18,6 +18,7 @@ type ProductContextType = {
   getProductName: (id: string) => string;
   addProduct: (product: Product) => void;
   deleteProduct: (id: string) => void;
+  deleteAllProductsFromCategories: (categoryId: string) => void;
   resetSelectedValues: () => void;
   sendWhatsApp: () => void;
   getProductsFormCategoryId: (id: string) => Product[];
@@ -52,6 +53,13 @@ export const ProductContextProvider = ({
 
   function deleteProduct(id: string): void {
     setProducts((prev) => prev.filter((p) => p.id !== id));
+  }
+
+  function deleteAllProductsFromCategories(categoryId: string) {
+    setProducts((prevProducts) =>
+      prevProducts.filter((p) => p.category_id !== categoryId),
+    );
+    console.log(JSON.stringify(products));
   }
 
   function resetSelectedValues() {
@@ -116,6 +124,7 @@ export const ProductContextProvider = ({
         getProductName,
         addProduct,
         deleteProduct,
+        deleteAllProductsFromCategories,
         resetSelectedValues,
         sendWhatsApp,
         getProductsFormCategoryId,

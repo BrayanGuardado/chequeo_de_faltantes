@@ -13,7 +13,10 @@ type CategoryContextType = {
 
   getCategoryName: (id: string) => string;
   addCategory: (category: Category) => void;
-  deleteCategory: (id: string) => void;
+  deleteCategory: (
+    id: string,
+    deleteAllProductsFromCategories: (categoryId: string) => void,
+  ) => void;
   resetCategoriesSelected: () => void;
   checkCategory: (categoryId: string, checked: boolean) => void;
 };
@@ -43,8 +46,12 @@ export const CategoryContextProvider = ({
     setCategories((prev) => [...prev, category]);
   }
 
-  function deleteCategory(id: string): void {
+  function deleteCategory(
+    id: string,
+    deleteAllProductsFromCategories: (categoryId: string) => void,
+  ): void {
     setCategories((prev) => prev.filter((p) => p.id !== id));
+    deleteAllProductsFromCategories(id);
   }
 
   function resetCategoriesSelected() {

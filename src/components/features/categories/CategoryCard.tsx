@@ -1,9 +1,18 @@
+import { useCategory } from "../../../context/CategoryContext";
+import { useProduct } from "../../../context/ProductContext";
+
 import type { Category } from "../../../types/categories";
 
 const CategoryCard = ({ category }: { category: Category }) => {
-  const { name } = category;
+  const { id, name } = category;
+  const { deleteAllProductsFromCategories } = useProduct();
+  const { deleteCategory } = useCategory();
 
-  const handleDelete = () => {}; //Pendiente
+  const handleDelete = (id: string) => {
+    deleteCategory(id, () => {
+      deleteAllProductsFromCategories(id);
+    });
+  };
 
   return (
     <div
@@ -23,7 +32,7 @@ const CategoryCard = ({ category }: { category: Category }) => {
       <p className="font-medium text-gray-800">{name}</p>
 
       <button
-        onClick={handleDelete}
+        onClick={() => handleDelete(id)}
         className="
           text-red-500
           opacity-60
